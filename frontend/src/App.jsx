@@ -8,7 +8,8 @@ import { Navbar } from "./components/Navbar";
 import { Dashboard } from "./pages/Dashboard";
 import { Groups } from "./pages/Groups";
 import { StudentFiles } from "./pages/StudentFiles";
-import { Assignments } from "./pages/Assignments";
+// CHANGE: Import StudentAssignments instead of Assignments
+import { StudentAssignments } from "./pages/Assignments";
 import Intract from "./pages/Intract";
 import SignInPage from "./pages/SignIn";
 import SignUpPage from "./pages/SignUp";
@@ -20,11 +21,9 @@ function AppLayout({ user, onLogout, children }) {
       <header className="sticky top-0 z-10">
         <Navbar onLogout={onLogout} />
       </header>
-
       <main className="py-10">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">{children}</div>
       </main>
-
       <footer className="bg-[#124559]/30 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-[#AEC3B0]">
           <p>&copy; 2025 OpenStudy. All rights reserved.</p>
@@ -36,7 +35,6 @@ function AppLayout({ user, onLogout, children }) {
 
 function App() {
   const isSignedIn = !!localStorage.getItem("jwt");
-  console.log(isSignedIn);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -56,7 +54,8 @@ function App() {
                   <Route path="/" element={<Dashboard user={{}} />} />
                   <Route path="/groups" element={<Groups />} />
                   <Route path="/files" element={<StudentFiles />} />
-                  <Route path="/assignments" element={<Assignments />} />
+                  {/* CHANGE: Use the StudentAssignments component for the route */}
+                  <Route path="/assignments" element={<StudentAssignments />} />
                   <Route path="/interact" element={<Intract />} />
                   {/* Redirect any other authenticated routes to dashboard */}
                   <Route path="*" element={<Navigate to="/" />} />
