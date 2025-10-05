@@ -2,6 +2,9 @@ import { Response, NextFunction } from "express";
 import jsonwebtoken from "jsonwebtoken";
 
 export function AuthMiddlware(req: any, res: Response, next: NextFunction) {
+    if (req.method === 'OPTIONS') {
+        return next();
+    }
     let token;
 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
